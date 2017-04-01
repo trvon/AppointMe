@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_centerInParent="true"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <EditText
@@ -8,27 +10,36 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
+        android:layout_marginTop="150dp"
+        android:id="@+id/idET"
+        android:hint="User ID" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/password"
+        android:hint="Password" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
         android:id="@+id/companyNameET"
-        android:hint="Company Name" />
+        android:hint="Host Identifier" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Special Identifier"
         android:ems="10"
-        android:id="@+id/idET" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="01/01/2017 3:00PM"
-        android:ems="10"
-        android:id="@+id/dateET" />
+        android:id="@+id/dateET"
+        android:hint="Date and time in 01/01/2017 3:00PM" />
 
     <Button
-        android:text="Request"
+        android:text="Log IN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/request" />
@@ -37,5 +48,6 @@
 android:text="signup"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
-android:id="@+id/signup" />
+android:id="@+id/signup"
+        android:visibility="gone" />
 </LinearLayout>

@@ -25,6 +25,7 @@ public class HomeFragment extends Fragment{
     EditText comp;
     EditText id;
     EditText date;
+    EditText password;
     Button request;
     Button signup;
     FirebaseDatabase database;
@@ -37,6 +38,7 @@ public class HomeFragment extends Fragment{
         // Write a message to the database
         database = FirebaseDatabase.getInstance();
 
+        password = (EditText) v.findViewById(R.id.password);
         comp = (EditText) v.findViewById(R.id.companyNameET);
         id= (EditText) v.findViewById(R.id.idET);
         date = (EditText) v.findViewById(R.id.dateET);
@@ -66,7 +68,7 @@ public class HomeFragment extends Fragment{
                 //Go to register fragment
             }
         });
-        //callAnthemPros();
+        callAnthemPros();
 
 
         return v;
@@ -74,33 +76,29 @@ public class HomeFragment extends Fragment{
 
     public void callAnthemPros(){
         DatabaseReference myRef2 = database.getReference("AnthemContacts");
-        Recipient h  = new Recipient("John", "Erickson",true);
-        h.setLocation("Rm 238");
+        Recipient h  = new Recipient("Michael", "Thompson",true);
+        h.setLocation("Rm 200");
         myRef2.child(0+"").setValue(h);
 
-        Recipient r  = new Recipient("John", "Erickson",true);
-        r.setLocation("Rm 238");
+        Recipient r  = new Recipient("Samuel", "Wart",true);
+        r.setLocation("Rm 103");
         myRef2.child(1+"").setValue(r);
 
-        Recipient a  = new Recipient("John", "Erickson",true);
-        a.setLocation("Rm 238");
+        Recipient a  = new Recipient("Chris", "Fallow",true);
+        a.setLocation("Rm 138");
         myRef2.child(2+"").setValue(a);
 
-        Recipient b  = new Recipient("John", "Erickson",true);
-        b.setLocation("Rm 238");
+        Recipient b  = new Recipient("Emily", "Stevens",true);
+        b.setLocation("Rm 338");
         myRef2.child(3+"").setValue(b);
 
-        Recipient c  = new Recipient("John", "Erickson",true);
-        c.setLocation("Rm 238");
+        Recipient c  = new Recipient("Amy", "Marshall",true);
+        c.setLocation("Rm 320");
         myRef2.child(4+"").setValue(c);
 
-        Recipient d  = new Recipient("John", "Erickson",true);
-        d.setLocation("Rm 238");
+        Recipient d  = new Recipient("David", "Erickson",true);
+        d.setLocation("Rm 011");
         myRef2.child(5+"").setValue(d);
-
-        Recipient e  = new Recipient("John", "Erickson",true);
-        e.setLocation("Rm 238");
-        myRef2.child(6+"").setValue(e);
     }
 
     @Override

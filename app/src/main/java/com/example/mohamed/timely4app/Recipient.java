@@ -1,5 +1,7 @@
 package com.example.mohamed.timely4app;
 
+import java.util.Random;
+
 import static java.lang.Math.random;
 
 /**
@@ -27,7 +29,8 @@ public class Recipient {
     }
 
     public Recipient(){
-        double m = Math.random()*10;
+        Random rand = new Random();
+        int m = rand.nextInt(10);
         if(m < 7){
             isAvailable = true;
         }

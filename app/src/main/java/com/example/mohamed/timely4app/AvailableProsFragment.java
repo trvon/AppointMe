@@ -1,6 +1,7 @@
 package com.example.mohamed.timely4app;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -67,7 +68,7 @@ public class AvailableProsFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int position = 0;//Integer.parseInt(dataSnapshot.getKey());
 
-                for (int i = 0; i < 6; i++) {
+                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++) {
                     //myAdapter.updateList(i, dataSnapshot.child(i + "").child("availability").getValue(Integer.class));
 
                     Recipient r = new Recipient();
@@ -110,7 +111,8 @@ myAdapter.notifyDataSetChanged();
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mRecyclerView.setAdapter(myAdapter);
-
+        SpacesItemDecoration dividerItemDecoration = new SpacesItemDecoration(30);
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
 
         return v;
     }
@@ -228,4 +230,24 @@ myAdapter.notifyDataSetChanged();
 
 
     }
+
+    public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
+        private int space;
+
+        public SpacesItemDecoration(int space) {
+            this.space = space;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            outRect.left = space;
+            outRect.right = space;
+            outRect.bottom = space;
+
+            // Add top margin only for the first item to avoid double space between items
+            if(parent.getChildAdapterPosition(view) == 0)
+                outRect.top = space;
+        }
+    }
+
 }
