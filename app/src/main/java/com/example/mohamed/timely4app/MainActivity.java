@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity
     public static String EXTRA_ADDRESS = "device_address";
     public String address = "";
     ViewPager viewPager;
+    public String company;
     CustomViewPager customViewPager = new CustomViewPager(getSupportFragmentManager());
 
     @Override
@@ -81,24 +83,31 @@ public class MainActivity extends AppCompatActivity
             Fragment f = null;
             if (position == 0){
                 f = new HomeFragment();
-
             }
             else if(position == 1){
                 f = new AvailableProsFragment();
+
             }
             else if(position == 2) {
-                f = new PairFragment();
+                f = new TimerFragment();
             }
-            else if(position == 3){
-                f = new ledControl();
+            else if(position == 3) {
+                f = new ListOfRedeemableItemsFragment();
+            }
+            else if(position == 4){
+                f = new SingleItemFragment();
             }
 
             return f;
         }
 
+        public void sendToPros(){
+
+        }
+
         @Override
         public int getCount() {
-            return 4;
+            return 5;
         }
     }
 }

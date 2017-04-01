@@ -7,9 +7,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Company Name"
         android:ems="10"
-        android:id="@+id/companyNameET" />
+        android:id="@+id/companyNameET"
+        android:hint="Company Name" />
 
     <EditText
         android:layout_width="match_parent"

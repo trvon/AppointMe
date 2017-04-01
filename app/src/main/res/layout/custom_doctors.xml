@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:elevation="5dp"
+    android:background="@drawable/myrect"
+    style="@style/CustomDeck"
+    android:layout_height="wrap_content">
+
+    <TextView
+
+        android:id="@+id/textPersonLocation"
+        android:text="235"
+        style="@style/TextStyle"
+        android:textAlignment="center"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="fill_parent" />
+
+    <TextView
+        android:text="Woodward"
+        style="@style/TextStyle"
+        android:id="@+id/textPersonName"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="fill_parent" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/avail"
+        android:layout_below="@+id/textPersonLocation"
+        android:layout_centerHorizontal="true" />
 
 </LinearLayout>
