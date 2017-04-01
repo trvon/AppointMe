@@ -17,6 +17,7 @@ public class HomeFragment extends Fragment{
 
     EditText comp;
     EditText id;
+    EditText date;
     Button request;
     Button signup;
 
@@ -26,6 +27,7 @@ public class HomeFragment extends Fragment{
         View v = inflater.inflate(R.layout.login_signup_fragment,container,false);
         comp = (EditText) v.findViewById(R.id.companyNameET);
         id= (EditText) v.findViewById(R.id.idET);
+        date = (EditText) v.findViewById(R.id.dateET);
         request = (Button) v.findViewById(R.id.request);
         request.setOnClickListener(new View.OnClickListener() {
             @Override

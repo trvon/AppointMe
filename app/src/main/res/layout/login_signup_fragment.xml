@@ -19,6 +19,14 @@
         android:ems="10"
         android:id="@+id/idET" />
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="01/01/2017 3:00PM"
+        android:ems="10"
+        android:id="@+id/dateET" />
+
     <Button
         android:text="Request"
         android:layout_width="match_parent"
@@ -26,8 +34,8 @@
         android:id="@+id/request" />
 
     <Button
-        android:text="signup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/signup" />
+android:text="signup"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:id="@+id/signup" />
 </LinearLayout>

@@ -1,15 +1,20 @@
 
 package com.example.mohamed.timely4app;
 
+import android.content.Context;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -24,7 +29,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 
-public class ledControl extends AppCompatActivity {
+public class ledControl extends Fragment{
 
     Button btnOn, btnOff, btnDis;
     SeekBar brightness;
@@ -34,28 +39,35 @@ public class ledControl extends AppCompatActivity {
     BluetoothAdapter myBluetooth = null;
     BluetoothSocket btSocket = null;
     private boolean isBtConnected = false;
+    MainActivity mainActivity;
+    Context ctx;
     //SPP UUID. Look for it
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
-        Intent newint = getIntent();
-        address = newint.getStringExtra(MainActivity.EXTRA_ADDRESS); //receive the address of the bluetooth device
+
+        /**
+         *
+         * NEED TO PASS THE ADDRESS OF THE BLUETOOTH DEVICE
+         */
+        //Intent newint = getArguments();
+        //address = newint.getStringExtra(MainActivity.EXTRA_ADDRESS); //receive the address of the bluetooth device
 
         //view of the ledControl
-        setContentView(R.layout.activity_led_control);
+        View v = inflater.inflate(R.layout.activity_led_control,container,false);
 
         //call the widgtes
-        btnOn = (Button)findViewById(R.id.button2);
-        btnOff = (Button)findViewById(R.id.button3);
-        btnDis = (Button)findViewById(R.id.button4);
-        brightness = (SeekBar)findViewById(R.id.seekBar);
-        lumn = (TextView)findViewById(R.id.lumn);
+        btnOn = (Button)v.findViewById(R.id.button2);
+        btnOff = (Button)v.findViewById(R.id.button3);
+        btnDis = (Button)v.findViewById(R.id.button4);
+        brightness = (SeekBar)v.findViewById(R.id.seekBar);
+        lumn = (TextView)v.findViewById(R.id.lumn);
 
-        new ConnectBT().execute(); //Call the class to connect
+
 
         //commands to be sent to bluetooth
         btnOn.setOnClickListener(new View.OnClickListener()
@@ -71,7 +83,9 @@ public class ledControl extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                turnOffLed();   //method to turn off
+
+                new ConnectBT().execute(); //Call the class to connect
+                //turnOffLed();   //method to turn off
             }
         });
 
@@ -111,6 +125,7 @@ public class ledControl extends AppCompatActivity {
 
             }
         });
+        return  v;
     }
 
     private void Disconnect()
@@ -124,7 +139,7 @@ public class ledControl extends AppCompatActivity {
             catch (IOException e)
             { msg("Error");}
         }
-        finish(); //return to the first layout
+        //finish(); //return to the first layout
 
     }
 
@@ -150,7 +165,7 @@ public class ledControl extends AppCompatActivity {
             try
             {
                 btSocket.getOutputStream().write("TO".getBytes());
-                Toast.makeText(getApplicationContext(),"turn on!",Toast.LENGTH_LONG).show();
+                Toast.makeText(((MainActivity) ctx).getApplicationContext(),"turn on!",Toast.LENGTH_LONG).show();
             }
             catch (IOException e)
             {
@@ -159,18 +174,25 @@ public class ledControl extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        ctx = context;
+        mainActivity = (MainActivity) context;
+    }
+
     // fast way to call Toast
     private void msg(String s)
     {
-        Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+        Toast.makeText(((MainActivity) ctx).getApplicationContext(),s,Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_led_control, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_led_control, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -194,7 +216,7 @@ public class ledControl extends AppCompatActivity {
         @Override
         protected void onPreExecute()
         {
-            progress = ProgressDialog.show(ledControl.this, "Connecting...", "Please wait!!!");  //show a progress dialog
+            progress = ProgressDialog.show(getActivity(), "Connecting...", "Please wait!!!");  //show a progress dialog
         }
 
         @Override
@@ -205,7 +227,7 @@ public class ledControl extends AppCompatActivity {
                 if (btSocket == null || !isBtConnected)
                 {
                     myBluetooth = BluetoothAdapter.getDefaultAdapter();//get the mobile bluetooth device
-                    BluetoothDevice dispositivo = myBluetooth.getRemoteDevice(address);//connects to the device's address and checks if it's available
+                    BluetoothDevice dispositivo = myBluetooth.getRemoteDevice(mainActivity.address);//connects to the device's address and checks if it's available
                     btSocket = dispositivo.createInsecureRfcommSocketToServiceRecord(myUUID);//create a RFCOMM (SPP) connection
                     BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
                     btSocket.connect();//start connection
@@ -225,7 +247,7 @@ public class ledControl extends AppCompatActivity {
             if (!ConnectSuccess)
             {
                 msg("Connection Failed. Is it a SPP Bluetooth? Try again.");
-                finish();
+                //finish();
             }
             else
             {
