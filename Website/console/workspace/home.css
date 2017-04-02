@@ -17,14 +17,12 @@
     width: 400px;
     height: 640px;
     padding: 10px 10px 10px 10px;
-    margin-top: 10px;
     background-color: #ffe3dd;
     border-radius: 5px;
     resize: vertical;
 }
 #header {
     float: inherit;
-    margin-top: 10px;
     position: absolute;
     top: 130px;
     padding-left: 85px;
