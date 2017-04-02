@@ -42,6 +42,10 @@ public class AvailableProsFragment extends Fragment {
     private DatabaseReference mConditionRef;
     DatabaseReference myRef;
     DatabaseReference myRef2;
+    String timeIn;
+    String timeOut;
+
+
 
     @Nullable
     @Override
@@ -57,7 +61,6 @@ public class AvailableProsFragment extends Fragment {
         //Log.d("ANTHEM","SUCCESS");
         myRef = database.getReference("AnthemContacts");
         myRef2 = database.getReference("AnthemUser");
-
 
         //myRef = database.getReference("AnthemUser");
         //myRef.child(0+"").setValue();
@@ -88,6 +91,20 @@ public class AvailableProsFragment extends Fragment {
 
 myAdapter.notifyDataSetChanged();
                 }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                timeIn = dataSnapshot.child(0+"").child("timeIn").getValue(String.class);
+                timeOut = dataSnapshot.child(0+"").child("timeOut").getValue(String.class);
+
             }
 
             @Override
@@ -147,6 +164,7 @@ myAdapter.notifyDataSetChanged();
             // each data item is just a string in this case
             public TextView mTextPersonName;
             public TextView mTextPersonLocation;
+            public TextView mHours;
             public Button mAvail;
             public ImageView rachel;
 
@@ -161,6 +179,7 @@ myAdapter.notifyDataSetChanged();
                 mTextPersonName = (TextView) v.findViewById(R.id.textPersonName);
                 mTextPersonLocation = (TextView) v.findViewById(R.id.textPersonLocation);
                 mAvail = (Button) v.findViewById(R.id.avail);
+                mHours = (TextView) v.findViewById(R.id.hours);
                 rachel = (ImageView) v.findViewById(R.id.rsz_rachel);
 
             }
@@ -209,21 +228,29 @@ myAdapter.notifyDataSetChanged();
             holder.mTextPersonName.setText("Name : " + mDataset.get(position).getfName());
             holder.mTextPersonLocation.setText("Floor level : " + mDataset.get(position).location);
             holder.mAvail.setText("Request "+mDataset.get(position).getfName());
+            holder.mHours.setText("Availability "+timeIn+"AM until "+timeOut+ " PM");
             Log.d("clickable",mDataset.get(position).getAvailable()+"");
             //holder.mAvail.setEnabled(mDataset.get(position).getAvailable());
             holder.mAvail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(mainActivity, holder.mTextPersonName.getText().toString()+" Has been notified! ", Toast.LENGTH_SHORT).show();
-                    //Send to Timer Fragment
-                    //Also notify firebase recipient here
-                    mainActivity.viewPager.setCurrentItem(3);
 
-User u = new User(mainActivity.nameA,mainActivity.companyA,"d");
-                    u.setWhyImHere(mainActivity.why);
-                    u.setDate(mainActivity.date);
-                    u.setTime(mainActivity.timeA);
-                    myRef2.child(0+"").setValue(u);
+                    if(Integer.parseInt(mainActivity.timeA.substring(0,1)) > Integer.parseInt(timeOut)){
+                        Toast.makeText(mainActivity,mDataset.get(position).getfName() +" Is not available at this time ",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Log.d("starboy", timeIn);
+                        Toast.makeText(mainActivity, holder.mTextPersonName.getText().toString() + " Has been notified! ", Toast.LENGTH_SHORT).show();
+                        //Send to Timer Fragment
+                        //Also notify firebase recipient here
+                        mainActivity.viewPager.setCurrentItem(3);
+
+                        User u = new User(mainActivity.nameA, mainActivity.companyA, "d");
+                        u.setWhyImHere(mainActivity.why);
+                        u.setDate(mainActivity.date);
+                        u.setTime(mainActivity.timeA);
+                        myRef2.child(0 + "").setValue(u);
+                    }
                 }
             });
 

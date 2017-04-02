@@ -93,8 +93,13 @@ public class TimerFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Start activity 2
-                Toast.makeText(getActivity(),"Logged in!",Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),"Logged in!",Toast.LENGTH_LONG).show();
                 Intent i = new Intent(mainActivity,CheckInActivity.class);
+                i.putExtra("NAME",mainActivity.nameA);
+                i.putExtra("COMPANY",mainActivity.companyA);
+                i.putExtra("TIME",mainActivity.timeA);
+                i.putExtra("DATE",mainActivity.date);
+                i.putExtra("WHY",mainActivity.why);
                 startActivity(i);
             }
         });

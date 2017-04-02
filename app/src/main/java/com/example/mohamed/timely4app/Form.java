@@ -49,7 +49,7 @@ public class Form extends Fragment {
         submitform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"Form stored please select who you want to set the Appt. with",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Form stored please select who you want to set the Appt. with!",Toast.LENGTH_SHORT).show();
                 mainActivity.viewPager.setCurrentItem(2);
                 mainActivity.why = purpose.getText().toString();
             }

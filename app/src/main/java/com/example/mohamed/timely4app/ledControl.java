@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,9 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.os.AsyncTask;
 
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -40,6 +44,7 @@ public class ledControl extends Fragment{
     BluetoothSocket btSocket = null;
     private boolean isBtConnected = false;
     CheckInActivity mainActivity;
+    FirebaseDatabase database;
     Context ctx;
     //SPP UUID. Look for it
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
@@ -48,6 +53,8 @@ public class ledControl extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        database = FirebaseDatabase.getInstance();
+
 
 
         /**
@@ -172,7 +179,14 @@ public class ledControl extends Fragment{
             try
             {
                 btSocket.getOutputStream().write("TO".getBytes());
-                Toast.makeText(mainActivity.getApplicationContext(),"turn on!",Toast.LENGTH_LONG).show();
+                //Send to firebase
+                DatabaseReference myRef = database.getReference("AnthemSecurity");
+                User u = new User(mainActivity.getIntent().getStringExtra("NAME"),mainActivity.getIntent().getStringExtra("COMPANY"),"d");
+                u.setDate(mainActivity.getIntent().getStringExtra("DATE"));
+                u.setTime(mainActivity.getIntent().getStringExtra("TIME"));
+                u.setWhyImHere(mainActivity.getIntent().getStringExtra("WHY"));
+                myRef.child(0+"").setValue(u);
+
             }
             catch (IOException e)
             {
@@ -261,7 +275,7 @@ public class ledControl extends Fragment{
                 msg("Connected.");
                 isBtConnected = true;
                 turnOnLed();
-                Toast.makeText(getActivity(),"Found you!, Sign up form configured",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Found you!, Sign up form submitted",Toast.LENGTH_SHORT).show();
             }
             progress.dismiss();
         }

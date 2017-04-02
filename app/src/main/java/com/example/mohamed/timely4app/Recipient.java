@@ -13,9 +13,28 @@ public class Recipient {
     String lName;
     String location;
     Boolean isAvailable;
+    String timeIn;
+    String timeOut;
+
+    public String getTimeIn() {
+        return timeIn;
+    }
+
+    public void setTimeIn(String timeIn) {
+        this.timeIn = timeIn;
+    }
+
+    public String getTimeOut() {
+        return timeOut;
+    }
+
+    public void setTimeOut(String timeOut) {
+        this.timeOut = timeOut;
+    }
 
     public Recipient(String fName, String lName, Boolean isAvailable) {
         this.fName = fName;
+
         this.lName = lName;
         //this.isAvailable = isAvailable;
         Random rand = new Random();

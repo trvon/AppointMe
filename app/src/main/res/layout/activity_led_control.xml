@@ -53,7 +53,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="#333333"
+        android:background="@color/colorPrimaryDark"
         android:text="Disconnect" />
 
     <TextView
