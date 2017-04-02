@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="#333333"
     android:layout_height="match_parent">
 
     <Button
@@ -10,6 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/begin"
+        android:background="@color/colorPrimary"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -81,13 +83,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/df"
+            android:background="@color/colorPrimary"
             android:id="@+id/redeemBtn" />
+
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:inputType="textPersonName"-->
+            <!--android:ems="10"-->
+            <!--android:id="@+id/key"-->
+            <!--android:hint="Key" />-->
 
         <Button
             android:text="Checkin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:id="@+id/checkIn" />
+
     </LinearLayout>
 
     <Chronometer
@@ -97,7 +110,8 @@
         android:textSize="30dp"
         android:layout_marginBottom="74dp"
         android:layout_alignBottom="@+id/view_ticktock_countup"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/background_light" />
 
 
 </RelativeLayout>

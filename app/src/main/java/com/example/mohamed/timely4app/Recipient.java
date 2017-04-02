@@ -17,7 +17,15 @@ public class Recipient {
     public Recipient(String fName, String lName, Boolean isAvailable) {
         this.fName = fName;
         this.lName = lName;
-        this.isAvailable = isAvailable;
+        //this.isAvailable = isAvailable;
+        Random rand = new Random();
+        int m = rand.nextInt(20);
+        if(m < 10){
+            this.isAvailable = true;
+        }
+        else{
+            this.isAvailable = false;
+        }
     }
 
     public String getLocation() {
@@ -30,12 +38,12 @@ public class Recipient {
 
     public Recipient(){
         Random rand = new Random();
-        int m = rand.nextInt(10);
-        if(m < 7){
-            isAvailable = true;
+        int m = rand.nextInt(20);
+        if(m < 10){
+            this.isAvailable = true;
         }
         else{
-            isAvailable = false;
+            this.isAvailable = false;
         }
     }
     public String getfName() {

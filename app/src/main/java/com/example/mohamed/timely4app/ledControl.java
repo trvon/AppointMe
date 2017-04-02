@@ -39,7 +39,7 @@ public class ledControl extends Fragment{
     BluetoothAdapter myBluetooth = null;
     BluetoothSocket btSocket = null;
     private boolean isBtConnected = false;
-    MainActivity mainActivity;
+    CheckInActivity mainActivity;
     Context ctx;
     //SPP UUID. Look for it
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
@@ -69,23 +69,25 @@ public class ledControl extends Fragment{
 
 
 
-        //commands to be sent to bluetooth
-        btnOn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                turnOnLed();      //method to turn on
-            }
-        });
+//        //commands to be sent to bluetooth
+//        btnOn.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+                new ledControl.ConnectBT().execute(); //Call the class to connect
+//                    //method to turn on
+//            }
+//        });
 
         btnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
 
-                new ConnectBT().execute(); //Call the class to connect
-                //turnOffLed();   //method to turn off
+                //new ledControl.ConnectBT().execute(); //Call the class to connect
+
+                turnOffLed();   //method to turn off
             }
         });
 
@@ -128,6 +130,11 @@ public class ledControl extends Fragment{
         return  v;
     }
 
+
+    private void connectMe(){
+        new ConnectBT().execute(); //Call the class to connect
+    }
+
     private void Disconnect()
     {
         if (btSocket!=null) //If the btSocket is busy
@@ -165,7 +172,7 @@ public class ledControl extends Fragment{
             try
             {
                 btSocket.getOutputStream().write("TO".getBytes());
-                Toast.makeText(((MainActivity) ctx).getApplicationContext(),"turn on!",Toast.LENGTH_LONG).show();
+                Toast.makeText(mainActivity.getApplicationContext(),"turn on!",Toast.LENGTH_LONG).show();
             }
             catch (IOException e)
             {
@@ -178,13 +185,13 @@ public class ledControl extends Fragment{
     public void onAttach(Context context) {
         super.onAttach(context);
         ctx = context;
-        mainActivity = (MainActivity) context;
+        mainActivity = (CheckInActivity) context;
     }
 
     // fast way to call Toast
     private void msg(String s)
     {
-        Toast.makeText(((MainActivity) ctx).getApplicationContext(),s,Toast.LENGTH_LONG).show();
+        Toast.makeText(mainActivity,s,Toast.LENGTH_LONG).show();
     }
 
 //    @Override
@@ -209,7 +216,7 @@ public class ledControl extends Fragment{
         return super.onOptionsItemSelected(item);
     }
 
-    private class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
+    public class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
     {
         private boolean ConnectSuccess = true; //if it's here, it's almost connected
 
@@ -227,7 +234,7 @@ public class ledControl extends Fragment{
                 if (btSocket == null || !isBtConnected)
                 {
                     myBluetooth = BluetoothAdapter.getDefaultAdapter();//get the mobile bluetooth device
-                    BluetoothDevice dispositivo = myBluetooth.getRemoteDevice(mainActivity.address);//connects to the device's address and checks if it's available
+                    BluetoothDevice dispositivo = myBluetooth.getRemoteDevice("98:D3:31:F4:05:7E");//connects to the device's address and checks if it's available
                     btSocket = dispositivo.createInsecureRfcommSocketToServiceRecord(myUUID);//create a RFCOMM (SPP) connection
                     BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
                     btSocket.connect();//start connection
@@ -253,6 +260,8 @@ public class ledControl extends Fragment{
             {
                 msg("Connected.");
                 isBtConnected = true;
+                turnOnLed();
+                Toast.makeText(getActivity(),"Found you!, Sign up form configured",Toast.LENGTH_SHORT).show();
             }
             progress.dismiss();
         }

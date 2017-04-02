@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,7 +102,8 @@ public class ListOfRedeemableItemsFragment extends Fragment {
                 public void onClick(View v) {
                     //Log.d("PLAY", "PLAY" + mDataset.get(position).getUrlToMp3());
                     // new PlayPodcastAsync(MyAdapterGrid.this).execute(mDataset.get(position).getUrlToMp3());
-                    ((MainActivity) mContext).viewPager.setCurrentItem(3);
+                    ((MainActivity) mContext).viewPager.setCurrentItem(5);
+                    Log.d("STARBUCK","STARBUCK");
 
 
                 }

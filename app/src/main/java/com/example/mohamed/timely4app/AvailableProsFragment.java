@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ public class AvailableProsFragment extends Fragment {
     RecyclerView.LayoutManager mLayoutManager;
     private DatabaseReference mConditionRef;
     DatabaseReference myRef;
+    DatabaseReference myRef2;
 
     @Nullable
     @Override
@@ -54,6 +56,11 @@ public class AvailableProsFragment extends Fragment {
 //            if(mainActivity.company.equals("Anthem")){
         //Log.d("ANTHEM","SUCCESS");
         myRef = database.getReference("AnthemContacts");
+        myRef2 = database.getReference("AnthemUser");
+
+
+        //myRef = database.getReference("AnthemUser");
+        //myRef.child(0+"").setValue();
 //        for (int i = 0; i < 6; i++) {
 //            Recipient r = new Recipient();
 //            r.setfName(myRef.child(i + "").);
@@ -141,6 +148,7 @@ myAdapter.notifyDataSetChanged();
             public TextView mTextPersonName;
             public TextView mTextPersonLocation;
             public Button mAvail;
+            public ImageView rachel;
 
 
             @Override
@@ -153,6 +161,7 @@ myAdapter.notifyDataSetChanged();
                 mTextPersonName = (TextView) v.findViewById(R.id.textPersonName);
                 mTextPersonLocation = (TextView) v.findViewById(R.id.textPersonLocation);
                 mAvail = (Button) v.findViewById(R.id.avail);
+                rachel = (ImageView) v.findViewById(R.id.rsz_rachel);
 
             }
 
@@ -198,18 +207,23 @@ myAdapter.notifyDataSetChanged();
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
             holder.mTextPersonName.setText("Name : " + mDataset.get(position).getfName());
-            holder.mTextPersonLocation.setText("Building # : " + mDataset.get(position).location);
-            holder.mAvail.setText("Request me!");
-            if (!mDataset.get(position).isAvailable) {
-                holder.mAvail.setClickable(false);
-            }
+            holder.mTextPersonLocation.setText("Floor level : " + mDataset.get(position).location);
+            holder.mAvail.setText("Request "+mDataset.get(position).getfName());
+            Log.d("clickable",mDataset.get(position).getAvailable()+"");
+            //holder.mAvail.setEnabled(mDataset.get(position).getAvailable());
             holder.mAvail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(mainActivity, holder.mTextPersonName.getText().toString()+" Has been notified! ", Toast.LENGTH_SHORT).show();
                     //Send to Timer Fragment
                     //Also notify firebase recipient here
-                    mainActivity.viewPager.setCurrentItem(2);
+                    mainActivity.viewPager.setCurrentItem(3);
+
+User u = new User(mainActivity.nameA,mainActivity.companyA,"d");
+                    u.setWhyImHere(mainActivity.why);
+                    u.setDate(mainActivity.date);
+                    u.setTime(mainActivity.timeA);
+                    myRef2.child(0+"").setValue(u);
                 }
             });
 
