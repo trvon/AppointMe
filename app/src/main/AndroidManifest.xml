@@ -16,7 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ledControl" android:label="LED Control">
+
+        <!--<activity android:name=".ledControl" android:label="LED Control">-->
+        <!--</activity>-->
+        <activity android:name=".CheckInActivity" android:label="LED Control">
         </activity>
     </application>
 

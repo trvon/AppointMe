@@ -25,9 +25,12 @@ public class HomeFragment extends Fragment{
     EditText comp;
     EditText id;
     EditText date;
+    EditText password;
     Button request;
     Button signup;
+    EditText why;
     FirebaseDatabase database;
+    EditText time;
     MainActivity mainActivity;
 
     @Nullable
@@ -36,22 +39,31 @@ public class HomeFragment extends Fragment{
         View v = inflater.inflate(R.layout.login_signup_fragment,container,false);
         // Write a message to the database
         database = FirebaseDatabase.getInstance();
-
+time = (EditText) v.findViewById(R.id.timea);
+        password = (EditText) v.findViewById(R.id.password);
         comp = (EditText) v.findViewById(R.id.companyNameET);
         id= (EditText) v.findViewById(R.id.idET);
         date = (EditText) v.findViewById(R.id.dateET);
+        //why = (EditText) v.findViewById(R.id.why) ;
         request = (Button) v.findViewById(R.id.request);
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Send request for comp child for the persons id
-                User u = new User("Sammy",id.getText().toString(),"Pinochet");
+                User u = new User(id.getText().toString(),comp.getText().toString(),"d");
                 u.setDate(date.getText().toString());
-                DatabaseReference myRef = database.getReference(comp.getText().toString());
-                myRef.setValue(u);
-                Toast.makeText(getActivity(),"Who are you visiting?",Toast.LENGTH_LONG).show();
+               // u.setWhyImHere(why.getText().toString());
+                DatabaseReference myRef = database.getReference("AnthemUser");
+                //myRef.child(0+"").setValue(u);
+                mainActivity.nameA = id.getText().toString();
+                mainActivity.companyA = comp.getText().toString();
+               // mainActivity.why = why.getText().toString();
+                mainActivity.date = date.getText().toString();
+                mainActivity.timeA = time.getText().toString();
+
+                //Toast.makeText(getActivity(),"Who are you visiting?",Toast.LENGTH_LONG).show();
                 mainActivity.company = comp.getText().toString();
-                Log.d("test",comp.getText().toString());
+               // Log.d("test",comp.getText().toString());
                 mainActivity.viewPager.setCurrentItem(1);
                 mainActivity.company = comp.getText().toString();
 
@@ -74,33 +86,29 @@ public class HomeFragment extends Fragment{
 
     public void callAnthemPros(){
         DatabaseReference myRef2 = database.getReference("AnthemContacts");
-        Recipient h  = new Recipient("John", "Erickson",true);
-        h.setLocation("Rm 238");
+        Recipient h  = new Recipient("Rachel", "Thompson",true);
+        h.setLocation("Rm 200");
         myRef2.child(0+"").setValue(h);
 
-        Recipient r  = new Recipient("John", "Erickson",true);
-        r.setLocation("Rm 238");
-        myRef2.child(1+"").setValue(r);
-
-        Recipient a  = new Recipient("John", "Erickson",true);
-        a.setLocation("Rm 238");
-        myRef2.child(2+"").setValue(a);
-
-        Recipient b  = new Recipient("John", "Erickson",true);
-        b.setLocation("Rm 238");
-        myRef2.child(3+"").setValue(b);
-
-        Recipient c  = new Recipient("John", "Erickson",true);
-        c.setLocation("Rm 238");
-        myRef2.child(4+"").setValue(c);
-
-        Recipient d  = new Recipient("John", "Erickson",true);
-        d.setLocation("Rm 238");
-        myRef2.child(5+"").setValue(d);
-
-        Recipient e  = new Recipient("John", "Erickson",true);
-        e.setLocation("Rm 238");
-        myRef2.child(6+"").setValue(e);
+//        Recipient r  = new Recipient("Samuel", "Wart",true);
+//        r.setLocation("Rm 103");
+//        myRef2.child(1+"").setValue(r);
+//
+//        Recipient a  = new Recipient("Chris", "Fallow",true);
+//        a.setLocation("Rm 138");
+//        myRef2.child(2+"").setValue(a);
+//
+//        Recipient b  = new Recipient("Emily", "Stevens",true);
+//        b.setLocation("Rm 338");
+//        myRef2.child(3+"").setValue(b);
+//
+//        Recipient c  = new Recipient("Amy", "Marshall",true);
+//        c.setLocation("Rm 320");
+//        myRef2.child(4+"").setValue(c);
+//
+//        Recipient d  = new Recipient("David", "Erickson",true);
+//        d.setLocation("Rm 011");
+//        myRef2.child(5+"").setValue(d);
     }
 
     @Override

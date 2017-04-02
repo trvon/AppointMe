@@ -4,10 +4,12 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +38,7 @@ public class PairFragment extends Fragment {
     public static String EXTRA_ADDRESS = "device_address";
     public String address = "";
     ViewPager viewPager;
-    public MainActivity mainActivity;
+    public CheckInActivity mainActivity;
 
     @Nullable
     @Override
@@ -64,6 +66,7 @@ public class PairFragment extends Fragment {
             Intent turnBTon = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(turnBTon,1);
         }
+
 
         btnPaired.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +104,7 @@ public class PairFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mainActivity = (MainActivity) context;
+        mainActivity = (CheckInActivity) context;
     }
 
     private AdapterView.OnItemClickListener myListClickListener = new AdapterView.OnItemClickListener()
@@ -112,7 +115,8 @@ public class PairFragment extends Fragment {
             String info = ((TextView) v).getText().toString();
             address = info.substring(info.length() - 17);
             mainActivity.address = address;
-            mainActivity.viewPager.setCurrentItem(3);
+            Log.d("lcoation",address);
+            mainActivity.viewPager2.setCurrentItem(1);
 
             // Make an intent to start next activity.
             //Intent i = new Intent(MainActivity.this, ledControl.class);

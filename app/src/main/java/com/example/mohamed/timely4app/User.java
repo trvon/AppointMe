@@ -9,9 +9,27 @@ public class User {
     public String id;
     public String lName;
     public String date;
+    public String whyImHere;
+    public String time;
 
     public String getDate() {
         return date;
+    }
+
+    public String getWhyImHere() {
+        return whyImHere;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setWhyImHere(String whyImHere) {
+        this.whyImHere = whyImHere;
     }
 
     public void setDate(String date) {

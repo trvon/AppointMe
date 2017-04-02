@@ -37,6 +37,12 @@ public class MainActivity extends AppCompatActivity
     private Set<BluetoothDevice> pairedDevices;
     public static String EXTRA_ADDRESS = "device_address";
     public String address = "";
+    public String nameA;
+    public String companyA;
+    public String why;
+    public String date;
+    public String timeA;
+
     ViewPager viewPager;
     public String company;
     CustomViewPager customViewPager = new CustomViewPager(getSupportFragmentManager());
@@ -85,16 +91,19 @@ public class MainActivity extends AppCompatActivity
                 f = new HomeFragment();
             }
             else if(position == 1){
+                f = new Form();
+            }
+            else if(position == 2){
                 f = new AvailableProsFragment();
 
             }
-            else if(position == 2) {
+            else if(position == 3) {
                 f = new TimerFragment();
             }
-            else if(position == 3) {
+            else if(position == 4) {
                 f = new ListOfRedeemableItemsFragment();
             }
-            else if(position == 4){
+            else if(position == 5){
                 f = new SingleItemFragment();
             }
 
@@ -107,7 +116,7 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public int getCount() {
-            return 5;
+            return 6;
         }
     }
 }

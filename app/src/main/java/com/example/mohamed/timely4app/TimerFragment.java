@@ -1,6 +1,7 @@
 package com.example.mohamed.timely4app;
 
 
+import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +48,10 @@ public class TimerFragment extends Fragment {
     SharedPreferences sp;
     private DevicePolicyManager mgr=null;
     private ComponentName cn=null;
+    private Button checkIn;
     Button lock;
+    MainActivity mainActivity;
+    EditText key;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,10 +71,12 @@ public class TimerFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //Switch to next tab
-                ((MainActivity)ctx).viewPager.setCurrentItem(2);
+                ((MainActivity)ctx).viewPager.setCurrentItem(4);
 
             }
         });
+
+
 
         begin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +87,22 @@ public class TimerFragment extends Fragment {
             }
         });
         redeemScreen.setVisibility(View.GONE);
+
+        checkIn = (Button)v.findViewById(R.id.checkIn);
+        checkIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Start activity 2
+                //Toast.makeText(getActivity(),"Logged in!",Toast.LENGTH_LONG).show();
+                Intent i = new Intent(mainActivity,CheckInActivity.class);
+                i.putExtra("NAME",mainActivity.nameA);
+                i.putExtra("COMPANY",mainActivity.companyA);
+                i.putExtra("TIME",mainActivity.timeA);
+                i.putExtra("DATE",mainActivity.date);
+                i.putExtra("WHY",mainActivity.why);
+                startActivity(i);
+            }
+        });
         return v;
     }
 
@@ -107,6 +130,12 @@ public class TimerFragment extends Fragment {
 //            Log.d("younis","younis");
 //        }
 //    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mainActivity = (MainActivity) (activity);
+    }
 
     @Override
     public void onStop() {

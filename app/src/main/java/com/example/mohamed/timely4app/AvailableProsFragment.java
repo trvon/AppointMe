@@ -1,6 +1,7 @@
 package com.example.mohamed.timely4app;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -39,6 +41,11 @@ public class AvailableProsFragment extends Fragment {
     RecyclerView.LayoutManager mLayoutManager;
     private DatabaseReference mConditionRef;
     DatabaseReference myRef;
+    DatabaseReference myRef2;
+    String timeIn;
+    String timeOut;
+
+
 
     @Nullable
     @Override
@@ -53,6 +60,10 @@ public class AvailableProsFragment extends Fragment {
 //            if(mainActivity.company.equals("Anthem")){
         //Log.d("ANTHEM","SUCCESS");
         myRef = database.getReference("AnthemContacts");
+        myRef2 = database.getReference("AnthemUser");
+
+        //myRef = database.getReference("AnthemUser");
+        //myRef.child(0+"").setValue();
 //        for (int i = 0; i < 6; i++) {
 //            Recipient r = new Recipient();
 //            r.setfName(myRef.child(i + "").);
@@ -67,7 +78,7 @@ public class AvailableProsFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int position = 0;//Integer.parseInt(dataSnapshot.getKey());
 
-                for (int i = 0; i < 6; i++) {
+                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++) {
                     //myAdapter.updateList(i, dataSnapshot.child(i + "").child("availability").getValue(Integer.class));
 
                     Recipient r = new Recipient();
@@ -80,6 +91,20 @@ public class AvailableProsFragment extends Fragment {
 
 myAdapter.notifyDataSetChanged();
                 }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                timeIn = dataSnapshot.child(0+"").child("timeIn").getValue(String.class);
+                timeOut = dataSnapshot.child(0+"").child("timeOut").getValue(String.class);
+
             }
 
             @Override
@@ -110,7 +135,8 @@ myAdapter.notifyDataSetChanged();
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mRecyclerView.setAdapter(myAdapter);
-
+        SpacesItemDecoration dividerItemDecoration = new SpacesItemDecoration(30);
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
 
         return v;
     }
@@ -138,7 +164,9 @@ myAdapter.notifyDataSetChanged();
             // each data item is just a string in this case
             public TextView mTextPersonName;
             public TextView mTextPersonLocation;
+            public TextView mHours;
             public Button mAvail;
+            public ImageView rachel;
 
 
             @Override
@@ -151,6 +179,8 @@ myAdapter.notifyDataSetChanged();
                 mTextPersonName = (TextView) v.findViewById(R.id.textPersonName);
                 mTextPersonLocation = (TextView) v.findViewById(R.id.textPersonLocation);
                 mAvail = (Button) v.findViewById(R.id.avail);
+                mHours = (TextView) v.findViewById(R.id.hours);
+                rachel = (ImageView) v.findViewById(R.id.rsz_rachel);
 
             }
 
@@ -196,18 +226,31 @@ myAdapter.notifyDataSetChanged();
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
             holder.mTextPersonName.setText("Name : " + mDataset.get(position).getfName());
-            holder.mTextPersonLocation.setText("Building # : " + mDataset.get(position).location);
-            holder.mAvail.setText("Request me!");
-            if (!mDataset.get(position).isAvailable) {
-                holder.mAvail.setClickable(false);
-            }
+            holder.mTextPersonLocation.setText("Floor level : " + mDataset.get(position).location);
+            holder.mAvail.setText("Request "+mDataset.get(position).getfName());
+            holder.mHours.setText("Availability "+timeIn+"AM until "+timeOut+ " PM");
+            Log.d("clickable",mDataset.get(position).getAvailable()+"");
+            //holder.mAvail.setEnabled(mDataset.get(position).getAvailable());
             holder.mAvail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(mainActivity, holder.mTextPersonName.getText().toString()+" Has been notified! ", Toast.LENGTH_SHORT).show();
-                    //Send to Timer Fragment
-                    //Also notify firebase recipient here
-                    mainActivity.viewPager.setCurrentItem(2);
+
+                    if(Integer.parseInt(mainActivity.timeA.substring(0,1)) > Integer.parseInt(timeOut)){
+                        Toast.makeText(mainActivity,mDataset.get(position).getfName() +" Is not available at this time ",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Log.d("starboy", timeIn);
+                        Toast.makeText(mainActivity, holder.mTextPersonName.getText().toString() + " Has been notified! ", Toast.LENGTH_SHORT).show();
+                        //Send to Timer Fragment
+                        //Also notify firebase recipient here
+                        mainActivity.viewPager.setCurrentItem(3);
+
+                        User u = new User(mainActivity.nameA, mainActivity.companyA, "d");
+                        u.setWhyImHere(mainActivity.why);
+                        u.setDate(mainActivity.date);
+                        u.setTime(mainActivity.timeA);
+                        myRef2.child(0 + "").setValue(u);
+                    }
                 }
             });
 
@@ -228,4 +271,24 @@ myAdapter.notifyDataSetChanged();
 
 
     }
+
+    public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
+        private int space;
+
+        public SpacesItemDecoration(int space) {
+            this.space = space;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            outRect.left = space;
+            outRect.right = space;
+            outRect.bottom = space;
+
+            // Add top margin only for the first item to avoid double space between items
+            if(parent.getChildAdapterPosition(view) == 0)
+                outRect.top = space;
+        }
+    }
+
 }

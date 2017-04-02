@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:id="@+id/fragment_single"
     android:layout_width="match_parent"
+    android:background="#333333"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -52,7 +53,7 @@
 
         <ImageView
             android:layout_width="128dp"
-            app:srcCompat="@drawable/starbucks"
+            app:srcCompat="@drawable/starb"
             android:id="@+id/imageView2"
             android:layout_height="128dp"
             android:layout_below="@+id/illBeThereBtn"
@@ -73,7 +74,8 @@
         android:layout_alignTop="@+id/whatsitabout"
         android:layout_alignRight="@+id/relativeLayout"
         android:layout_alignEnd="@+id/relativeLayout"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:textColor="@android:color/background_light" />
 
     <TextView
         android:text="Redeem Your Awards :"
@@ -86,6 +88,7 @@
         android:textAlignment="center"
         android:fontFamily="casual"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/relativeLayout" />
+        android:layout_alignStart="@+id/relativeLayout"
+        android:textColor="@android:color/background_light" />
 
 </RelativeLayout>
