@@ -1,0 +1,138 @@
+.body {
+  display: -webkit-flex;
+  align-content: center;
+  display: flex;
+  width: 425px;
+  height: 675px;
+  background-color:#381414;
+  padding: 10px 10px 10px 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  box-shadow: 10px 10px 5px #5e5e5e;
+}
+
+.main {
+  display: -webkit-flex;
+  align-items: center;
+  width: 400px;
+  height: 640px;
+  padding: 10px 10px 10px 10px;
+  margin-top: 10px;
+  background-color: #ffe3dd;
+  border-radius: 5px;
+  resize: vertical;
+}
+#header {
+  float: inherit;
+  margin-top: 10px;
+  position: absolute;
+  top: 130px;
+  padding-left: 85px;
+  font-family: Lobster;
+  font-size: 40px;
+  text-align: center;
+  font-weight: bold;
+}
+h3 {
+  padding-left: 50px;
+  top: 30px;
+}
+.styled {
+  text-align: right;
+  align-content: right;
+}
+
+.main hr {
+  border: 2px dotted #381414;
+}
+
+.main h1 {
+  font-family: Lobster;
+  font-size: 60px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.main form h2 {
+  font-size: 24px;
+  padding-bottom: -10px;
+  padding-bottom: -10px;
+}
+
+
+.describe {
+  width: 100%;
+  height: 60px;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  resize: none;
+  white-space: normal;
+  display: block;
+}
+
+form {
+  font-size: 12px;
+  align-items: center;
+  padding: 2px 2px 2px 2px;
+}
+
+input {
+  width: 100%;
+  border: 1px solid;
+  border-radius: 4px;
+}
+
+#login {
+  margin-top: -60px !important;
+  padding-right: 30px !important;
+}
+
+#register {
+  margin-top: -60px !important;
+  float : right !important;
+  margin-right: 100px !important;
+}
+
+input[type=button] {
+  width: 30%;
+  border: 1px solid;
+  border-radius: 5px;
+  margin-top: 80px;
+  background: #685656;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+input[type=button]:hover {
+  background: white;
+  color: #685656;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+/*navigation*/
+#primary ul {
+  list-style-type: none;
+}
+#primary {
+  position: fixed;
+  top: 75px;
+  border-radius: 5px;
+  padding-top: 25px;
+  padding-left: 70px;
+}
+#primary li a {
+  display: inline;
+  color: #382020;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: 2em;
+}
+
+#primary li a:hover,
+#primary li a:focus {
+  color: #fffecc;
+  background: #382020;
+  border-radius: 5px;
+}

@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+<img id="pic" src="IMG_4405.JPG" height="128" width="128"/>
+<h1 id="name">
+    
+</h1>
+<h1 id="date">
+    
+</h1>
+<h1 id="time">
+  
+</h1>
+<h1 id="why">
+   
+</h1>
+<h1 id="dd" >
+
+</h1>
+
+<button id="btn" type="button" onclick= "finish()">
+Confirm Appt.</button>
+
+
+</body>
+</html>
+
+
+
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-database.js"></script>
+  <link rel="stylesheet" href="home.css">
+  
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA0k9j5dceCFVeRp0OLP_DTnXJ2mn5C0DQ",
+    authDomain: "timely4-88b69.firebaseapp.com",
+    databaseURL: "https://timely4-88b69.firebaseio.com",
+    projectId: "timely4-88b69",
+    storageBucket: "timely4-88b69.appspot.com",
+    messagingSenderId: "252859490902"
+  };
+  firebase.initializeApp(config);
+  var rootRef = firebase.database();
+  
+  var starCountRef = firebase.database().ref('AnthemSecurity/' + "0");
+starCountRef.on('value', function(snapshot) {
+ // updateStarCount(postElement, snapshot.val());
+ console.log("VALUE",snapshot.val());
+ document.getElementById("name").innerHTML =  snapshot.val().fName;
+  document.getElementById("date").innerHTML = "Appt. on: "+snapshot.val().date;
+ document.getElementById("time").innerHTML = "at: "+snapshot.val().time;
+ document.getElementById("why").innerHTML = "Reasoning: "+snapshot.val().whyImHere;
+ if(snapshot.val().fName == ""){
+       document.getElementById("dd").innerHTML = "";
+      document.getElementById('pic').style.visibility='hidden';
+      document.getElementById('btn').style.visibility='hidden';
+
+       
+ }
+ else{
+  document.getElementById("dd").innerHTML = "Confirmed meeting with Monica"
+      document.getElementById('pic').style.visibility='visible';
+            document.getElementById('btn').style.visibility='visible';
+
+
+ }
+
+
+//   document.write(snapshot.val().fName);
+//  document.write(snapshot.val().id);
+//  document.write(snapshot.val().time);
+
+
+
+
+});
+</script>
+<script>
+function finish() {
+    console.log("poop2");
+   //Remove person from 
+   firebase.database().ref('AnthemSecurity/').remove();
+      document.getElementById("pic").style.visibility = "hidden"
+    document.getElementById("btn").style.visibility = "hidden"
+   document.getElementById("name").innerHTML =  ""
+  document.getElementById("date").innerHTML = ""
+ document.getElementById("time").innerHTML = ""
+  document.getElementById("dd").innerHTML =""
+ document.getElementById("why").innerHTML = ""
+}
+</script>

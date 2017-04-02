@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <link href="home.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+  <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+</head>
+<body>
+  <div class="body container-fluid">
+    <div class="main container-fluid center-block">
+      <nav class="navbar" id="primary" role="navigation">
+        <div class="container-fluid row center-block">
+          <ul class="nav navbar-nav">
+            <li><a href="home.html">Console<li>
+            <li><a href="notify.html">Notify</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <h1 id="header">Admin Console</h1>
+      <div class="container"style="padding-top:75px;">
+        <h3 class="header center-block" style="margin-left:75px;">Requested</h3>
+          <div class="container-fluid center-block">
+            <img id="pic" class="img-rounded center-block" src="IMG_4405.JPG" height="150" width="150" style=" margin-left:85px;"/>
+            <div style="margin-left: 5px; padding-top: 10px">
+              <ul>
+                <li id="date"></li>
+                <li id="time"></li>
+                <li id="why"></li>
+                <li id="dd"></li>
+                <li id="temp"></li>
+                <li id="empName"></li>
+                <li id="local"></li>
+              </ul>
+            </div>
+            </div>
+
+          <div class="choose container-fluid" style="margin-left: 10px; padding-top: 50px;">
+            <button id="button" type="button" onclick="finish()"><span>Accept</span></button>
+            <button id="btn" type="button" onclick="finish()"><span>Deny</span></button>
+            <button id="refernce" type="button" onclick="more()"><span>Info</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+</html>
+
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-database.js"></script>
+<script src="home.js"></script>
+<link href="home.css" rel="stylesheet">
+

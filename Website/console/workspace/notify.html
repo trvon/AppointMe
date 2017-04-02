@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link href="home.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+</head>
+<body>
+<div class="body container-fluid">
+    <div class="main container-fluid center-block">
+        <nav class="navbar" id="primary" role="navigation">
+            <div class="container-fluid row center-block">
+                <ul class="nav navbar-nav">
+                    <li><a href="home.html">Console<li>
+                    <li><a href="notify.html">Notify</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <h1 id="header" style="margin-left: 45px">Notify</h1>
+        <div class="container">
+            <h3 class="header center-block" style="margin-left:75px;">Requested</h3>
+            <div class="container-fluid center-block">
+                <img id="pic" class="img-rounded center-block" src="IMG_4405.JPG" height="150" width="150" style="top: 20px; margin-left:85px;"/>
+                <div style="margin-left: 5px; padding-top: 10px">
+                    <hr id="temp">
+                    <h3 id="name"></h3>
+                    <h3 id="local"></h3>
+                </div>
+
+                <div class="choose container-fluid" style="margin-left: 100px; padding-top: 25px;">
+                    <button id="arrive" type="button" onclick="arrived()"><span>Arrived</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
+
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-database.js"></script>
+<link rel="stylesheet" href="home.css">
+<script src="home.js"></script>
+

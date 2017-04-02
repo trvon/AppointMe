@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#333333"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Quick Form"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textColor="@color/colorAccent" />
+
+    <ImageView
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        app:srcCompat="@drawable/am3"
+        android:id="@+id/imageView4"
+        android:layout_width="150dp"
+        android:layout_height="150dp" />
+
+    <TextView
+        android:text="TextView"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:textColor="@android:color/background_light" />
+
+    <TextView
+        android:text="TextView"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/email"
+        android:textColor="@android:color/background_light" />
+
+    <TextView
+        android:text="TextView"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/address"
+        android:textColor="@android:color/background_light" />
+
+
+    <TextView
+        android:text="Perferred Contact Method"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView8"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light" />
+
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:text="Email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton"
+            android:layout_weight="1"
+            android:textColor="@android:color/background_light" />
+
+        <RadioButton
+            android:text="Phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton2"
+            android:layout_weight="1"
+            android:textColor="@android:color/background_light" />
+
+        <RadioButton
+            android:text="Mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton3"
+            android:layout_weight="1"
+            android:textColor="@android:color/background_light" />
+    </RadioGroup>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/purpose"
+        android:hint="Appt. Purpose"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold"
+        android:textColorHint="@color/colorAccent" />
+
+    <Button
+        android:text="Submit"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="10dp"
+        android:id="@+id/submitform" />
+</LinearLayout>
