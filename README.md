@@ -1,4 +1,4 @@
-# Appointt Me
+# Appoint Me
 Simplifying the Checkin Processes of Offices
 
 Disclaimer (Firebase login not working)
